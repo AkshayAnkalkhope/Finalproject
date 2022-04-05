@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
+
 import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "react-bootstrap/Navbar";
 import Swal from "sweetalert2";
 import axios from "axios";
+import "./Admin.css";
+import { lightBlue } from "@material-ui/core/colors";
+import { NavDropdown } from "react-bootstrap";
 
 function Adminadd() {
   const [productName, setproductName] = useState("");
@@ -72,6 +76,7 @@ function Adminadd() {
         productsize: productsize,
         productcolor: productcolor,
         productbrand: productbrand,
+        gender: gender,
       };
       let status = await axios.post(
         "http://localhost:8080/add-product",
@@ -105,8 +110,8 @@ function Adminadd() {
   return (
     <>
       <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand">TRY IT ON</a>
+        <div class="container-fluid" style={{ height: "75px" }}>
+          <a class="navbar-brand text-center fs-1">TRY IT ON</a>
           <form class="d-flex">
             <button class="form-control me-2" type="submit">
               LogIn
@@ -117,104 +122,179 @@ function Adminadd() {
           </form>
         </div>
       </nav>
-      <div className="container bg-primary height-100 p-5 rounded">
-        <div className="row mb-5">
-          <div className="col alert alert-primary fs-1 text-center">
-            Add Admin products
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <div className="col-6">
-            <form>
-              <input
-                className="form-control form-control-lg fs-2"
-                type="text"
-                placeholder="enter product name"
-                required
-                value={productName}
-                onChange={changeproductName}
-              />
-              <br />
-              <input
-                className="form-control form-control-lg fs-2"
-                type="text"
-                placeholder="enter product price"
-                value={productprice}
-                onChange={changeproductprice}
-                required
-              />
-              <br />
-              <input
-                className="form-control form-control-lg fs-2"
-                type="text"
-                placeholder="enter product quantity"
-                value={productquantity}
-                onChange={changeproductquantity}
-                required
-              />
-              <br />
-              <input
-                className="form-control form-control-lg fs-2"
-                type="text"
-                placeholder="enter product status"
-                value={productstatus}
-                onChange={changeproductstatus}
-                required
-              />
-              <br />
-              <input
-                className="form-control form-control-lg fs-2"
-                type="text"
-                placeholder="enter product category"
-                value={productcategory}
-                onChange={changeproductcategory}
-                required
-              />
-              <br />
-              <input
-                className="form-control form-control-lg fs-2"
-                type="text"
-                placeholder="enter gender"
-                value={gender}
-                onChange={changegender}
-                required
-              />
-              <br />
-              <input
-                className="form-control form-control-lg fs-2"
-                type="text"
-                placeholder="enter product color"
-                value={productcolor}
-                onChange={changeproductcolor}
-                required
-              />
-              <br />
-              <input
-                className="form-control form-control-lg fs-2"
-                type="text"
-                placeholder="enter product size"
-                value={productsize}
-                onChange={changeproductsize}
-                required
-              />
-              <br />
-              <input
-                className="form-control form-control-lg fs-2"
-                type="text"
-                placeholder="enter product brand"
-                value={productbrand}
-                onChange={changeproductbrand}
-                required
-              />
-              <br />
-              <p>Click on the "Choose File" button to upload a file:</p>
+      <div class="container justify-content-center">
+        <div class="card " style={{ width: "80vw" }}>
+          <div class="card-body">
+            <div
+              className="container  height-100 p-5 rounded"
+              style={{
+                width: "80vw",
+                backgroundColor: "rgba(0,0,255,0.1)",
+              }}
+            >
+              <div className="row mb-5">
+                <div
+                  className="col   fs-2 text-center"
+                  style={{ color: "blue" }}
+                >
+                  Add Admin products
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div className="col-6">
+                  <form>
+                    <div className="d-flex justify-content-evenly">
+                      <label for="pname">Product name:</label>
+                      <input
+                        type="text"
+                        id="pname"
+                        name="pname"
+                        placeholder="Enter product name"
+                        required
+                        value={productName}
+                        onChange={changeproductName}
+                      ></input>
+                    </div>
+                    <br />
+                    <div className="d-flex justify-content-evenly">
+                      <label for="pname">Product price:</label>
+                      <input
+                        type="text"
+                        id="pname"
+                        name="pname"
+                        placeholder="Enter product price"
+                        required
+                        value={productprice}
+                        onChange={changeproductprice}
+                      ></input>
+                    </div>
 
-              <form action="/action_page.php">
-                <input type="file" id="myFile" name="filename"></input>
-              </form>
-              <br />
-              <button type="submit">Addproduct</button>
-            </form>
+                    <br />
+                    <div className="d-flex justify-content-evenly">
+                      <label for="pname">Product status:</label>
+                      <input
+                        type="text"
+                        id="pstatus"
+                        name="pstatus"
+                        placeholder="Enter product status"
+                        required
+                        value={productstatus}
+                        onChange={changeproductstatus}
+                      ></input>
+                    </div>
+                    <br />
+                    <div className="d-flex justify-content-evenly">
+                      <label for="pname">Gender:</label>
+                      <div className="d-flex ">
+                        <div className="form-check me-4">
+                          <input
+                            className="form-check-input "
+                            type="radio"
+                            name="flexRadioDefault"
+                            id="flexRadioDefault1"
+                          ></input>
+                          <label
+                            className="form-check-label"
+                            for="flexRadioDefault1"
+                          >
+                            Male
+                          </label>
+                        </div>
+                        <br />
+                        <div className="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="flexRadioDefault"
+                            id="flexRadioDefault2"
+                            checked
+                          ></input>
+                          <label
+                            className="form-check-label"
+                            for="flexRadioDefault2"
+                          >
+                            Female
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                    <div className="d-flex justify-content-evenly">
+                      <label for="pcategory">Product category:</label>
+                      <select
+                        className="form-select"
+                        style={{ width: "200px" }}
+                      >
+                        <option selected>Open this select menu</option>
+                        <option value="1">T-Shirt</option>
+                        <option value="2">Shirt</option>
+                        <option value="3">Jacket</option>
+                        <option value="4">Coat</option>
+                        <option value="5">shorts</option>
+                        <option value="6">Jeans</option>
+                        <option value="7">Sweater</option>
+                        <option value="8">Jerkin</option>
+                        <option value="9">Swimsuit</option>
+                        <option value="10">Tracksuit</option>
+                      </select>
+                    </div>
+                    <br />
+                    <div className="d-flex justify-content-evenly">
+                      <label for="pname">Product color:</label>
+                      <input
+                        type="text"
+                        id="pcolor"
+                        name="pcolor"
+                        placeholder="Enter product color"
+                        required
+                        value={productcolor}
+                        onChange={changeproductcolor}
+                      ></input>
+                    </div>
+
+                    <br />
+                    <div className="d-flex justify-content-evenly">
+                      <label for="pname">Product size:</label>
+                      <input
+                        type="text"
+                        id="pssize"
+                        name="psize"
+                        placeholder="Enter product size"
+                        required
+                        value={productsize}
+                        onChange={changeproductsize}
+                      ></input>
+                    </div>
+                    <br />
+                    <div className="d-flex justify-content-evenly">
+                      <label for="pname">Product Brand:</label>
+                      <input
+                        type="text"
+                        id="pbrand"
+                        name="pbrand"
+                        placeholder="Enter product brand"
+                        required
+                        value={productbrand}
+                        onChange={changeproductbrand}
+                      ></input>
+                    </div>
+                    <br />
+                    <div className="d-flex justify-content-between mb-5">
+                      <label for="pname"></label>
+                      <form action="/action_page.php">
+                        <input type="file" id="myFile" name="filename"></input>
+                      </form>
+                    </div>
+                    <br />
+                    <div className="container text-center  ">
+                      <button type="submit" class="btn btn-primary bg-primary">
+                        Addproduct
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

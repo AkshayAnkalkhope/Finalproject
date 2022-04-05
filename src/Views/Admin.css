@@ -1,0 +1,11 @@
+/*.container {
+  background-image: url("cloth.jpg");
+  background-size: cover;
+  opacity: default;
+}*/
+
+.f1 {
+  display: flex;
+  justify-content: center;
+  margin-left: 50px;
+}
